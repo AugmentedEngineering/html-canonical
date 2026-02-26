@@ -854,7 +854,7 @@ module Html
       attr_str = attrs.to_s.empty? ? "" : " #{attrs}"
 
       # Void elements (no closing tag)
-      void_elements = [ "input", "img", "!DOCTYPE html", "meta" ]
+      void_elements = [ "!DOCTYPE html", "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr" ]
       if void_elements.include?(node.tag_name)
         return "#{spaces}<#{node.tag_name}#{attr_str}>"
       end

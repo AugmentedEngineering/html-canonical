@@ -333,6 +333,21 @@ RSpec.describe "body" do
   end
 end
 
+RSpec.describe "render_html" do
+  it "renders a document in text" do
+    config = HtmlConfig.new(theme: 'dark', auto_id_prefix: '')
+    build_result = body().run(config: config, state: 0)
+    result = render_html(build_result.result.value!)
+    expect(result).to eq("<body class=\"theme-dark\"></body>")
+  end
+  it "self closes the tag" do
+    config = HtmlConfig.new(theme: 'dark', auto_id_prefix: '')
+    build_result = br().run(config: config, state: 0)
+    result = render_html(build_result.result.value!)
+    expect(result).to eq("<br>")
+  end
+end
+
 RSpec.describe "document" do
   context "when it has a valid doctype" do
     it "genarates a html tag" do
