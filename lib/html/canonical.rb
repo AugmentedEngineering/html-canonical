@@ -851,7 +851,7 @@ module Html
       attrs = node.attrs
         .map { |k, v| "#{k}=\"#{v}\"" }
         .join(" ").strip
-      attr_str = attrs.present? ? " #{attrs}" : ""
+      attr_str = attrs.to_s.empty? ? "" : " #{attrs}"
 
       # Void elements (no closing tag)
       void_elements = [ "input", "img", "!DOCTYPE html", "meta" ]
@@ -867,7 +867,7 @@ module Html
       end
 
       children_str = if node.children.count.positive?
-        if node.children.count.eql?(1) && node.children[0].try(:is_text)
+        if node.children.count.eql?(1) && !!node.children[0]&.is_text
           # <footer>
           #  <span>2026 Augmented Engineering UG, Geschäftsführer Julian Vargas</span>
           # </footer>
